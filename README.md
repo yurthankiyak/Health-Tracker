@@ -40,7 +40,7 @@ Uygulamayı kendi bilgisayarınızda çalıştırmak için aşağıdaki adımlar
 Uygulamanın çalışma anına ait kısa videoyu aşağıdan izleyebilirsiniz:
 > [Tanıtım Videosu (YouTube Unlisted)] - https://www.youtube.com/shorts/oQE2upYdSc4
 
-## APK/IPA Dosyaları
+## APK Dosyaları
 Uygulamanın kurulum dosyalarına (Android APK) aşağıdaki bölümden ulaşabilirsiniz:
 > [APK İndirme Bağlantısı] - https://github.com/yurthankiyak/Health-Tracker/releases/download/v1.0.0/HealthTracker.apk
 
