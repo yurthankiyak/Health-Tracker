@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -7,34 +7,13 @@ import { theme } from '../constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import { useAppStore, BloodSugarRecord } from '../store/useAppStore';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'BloodSugarList'>;
 
-export interface BloodSugarRecord {
-  id: string;
-  meal: string;
-  status: string;
-  date: string;
-  time: string;
-  glucoseValue: number;
-  insulinDose: string;
-}
-
-const initialData: BloodSugarRecord[] = [
-  {
-    id: '1',
-    meal: 'Sabah',
-    status: 'Açlık',
-    date: new Date().toLocaleDateString('tr-TR').replace(/\./g, '-'),
-    time: '16:58:00',
-    glucoseValue: 60,
-    insulinDose: '',
-  }
-];
-
 const BloodSugarListScreen = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [data, setData] = useState<BloodSugarRecord[]>(initialData);
+  const { bloodSugarRecords, removeBloodSugar } = useAppStore();
 
   const handleDelete = (id: string) => {
     Alert.alert(
@@ -42,7 +21,7 @@ const BloodSugarListScreen = () => {
       "Bu kaydı silmek istediğinize emin misiniz?",
       [
         { text: "İptal", style: "cancel" },
-        { text: "Sil", style: "destructive", onPress: () => setData(data.filter(item => item.id !== id)) }
+        { text: "Sil", style: "destructive", onPress: () => removeBloodSugar(id) }
       ]
     );
   };
@@ -53,31 +32,37 @@ const BloodSugarListScreen = () => {
 
   const currentDate = new Date().toLocaleDateString('tr-TR').replace(/\./g, '-');
 
-  const renderItem = ({ item }: { item: BloodSugarRecord }) => (
-    <Card style={styles.card}>
-      <View style={styles.cardContent}>
-        <View style={styles.textContainer}>
-          <Text style={styles.rowText}><Text style={styles.label}>Öğünü:</Text> {item.meal}</Text>
-          <Text style={styles.rowText}><Text style={styles.label}>Açlık Durumu:</Text> {item.status}</Text>
-          <Text style={styles.rowText}><Text style={styles.label}>Tarih:</Text> {item.date}</Text>
-          <Text style={styles.rowText}><Text style={styles.label}>Saat:</Text> {item.time}</Text>
-          <Text style={styles.rowText}><Text style={styles.label}>Kan Şekeri Değeri:</Text> {item.glucoseValue}</Text>
-          <Text style={styles.rowText}><Text style={styles.label}>İnsülin Dozu:</Text> {item.insulinDose}</Text>
-        </View>
-        <View style={styles.actionsContainer}>
-          <View style={styles.avatarPlaceholder} />
-          <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.iconButton} onPress={handleInfo}>
-              <Ionicons name="information-circle" size={24} color={theme.colors.buttonBlue} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} onPress={() => handleDelete(item.id)}>
-              <Ionicons name="trash" size={24} color="red" />
-            </TouchableOpacity>
+  const renderItem = ({ item }: { item: BloodSugarRecord }) => {
+    const isHigh = item.glucoseValue > 140 && item.status === 'Tokluk';
+    const isLow = item.glucoseValue < 70;
+    const warningColor = isHigh || isLow ? 'red' : theme.colors.primary;
+
+    return (
+      <Card style={[styles.card, { borderColor: warningColor }]}>
+        <View style={styles.cardContent}>
+          <View style={styles.textContainer}>
+            <Text style={styles.rowText}><Text style={styles.label}>Öğünü:</Text> {item.meal}</Text>
+            <Text style={styles.rowText}><Text style={styles.label}>Ölçüm Durumu:</Text> {item.status}</Text>
+            <Text style={styles.rowText}><Text style={styles.label}>Tarih:</Text> {item.date}</Text>
+            <Text style={styles.rowText}><Text style={styles.label}>Saat:</Text> {item.time}</Text>
+            <Text style={styles.rowText}><Text style={styles.label}>Kan Şekeri Değeri:</Text> <Text style={{color: warningColor, fontWeight: 'bold'}}>{item.glucoseValue}</Text></Text>
+            <Text style={styles.rowText}><Text style={styles.label}>İnsülin Dozu:</Text> {item.insulinDose}</Text>
+          </View>
+          <View style={styles.actionsContainer}>
+            <View style={styles.avatarPlaceholder} />
+            <View style={styles.iconRow}>
+              <TouchableOpacity style={styles.iconButton} onPress={handleInfo}>
+                <Ionicons name="information-circle" size={24} color={theme.colors.buttonBlue} />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.iconButton} onPress={() => handleDelete(item.id)}>
+                <Ionicons name="trash" size={24} color="red" />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </Card>
-  );
+      </Card>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,7 +81,7 @@ const BloodSugarListScreen = () => {
       </View>
       
       <FlatList 
-        data={data}
+        data={bloodSugarRecords}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
@@ -140,7 +125,6 @@ const styles = StyleSheet.create({
   },
   card: {
     borderWidth: 2,
-    borderColor: 'red',
     borderRadius: theme.borderRadius.m,
     padding: 12,
   },
