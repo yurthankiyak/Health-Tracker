@@ -36,11 +36,11 @@ Uygulamayı kendi bilgisayarınızda çalıştırmak için aşağıdaki adımlar
    - Terminalde çıkan **QR kodu** telefonunuzun kamerası (veya Expo Go uygulaması) ile taratın.
    - Uygulama saniyeler içinde telefonunuzda açılacaktır.
 
-## 📹 Uygulama Tanıtım Videosu
+## Uygulama Tanıtım Videosu
 Uygulamanın çalışma anına ait kısa videoyu aşağıdan izleyebilirsiniz:
 > [Tanıtım Videosu (YouTube Unlisted)] - https://www.youtube.com/shorts/oQE2upYdSc4
 
-## 📱 APK/IPA Dosyaları
+## APK/IPA Dosyaları
 Uygulamanın kurulum dosyalarına (Android APK) aşağıdaki bölümden ulaşabilirsiniz:
 > [APK İndirme Bağlantısı] - https://github.com/yurthankiyak/Health-Tracker/releases/download/v1.0.0/HealthTracker.apk
 
