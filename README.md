@@ -1,4 +1,4 @@
-﻿# Gebelik Takip ve Sağlık Uygulaması (Pregnancy Tracker)
+﻿# Gebelik Takip ve Sağlık Uygulaması (Health Tracker)
 
 Bu proje, hamilelik sürecindeki annelerin **Kan Şekeri**, **Beslenme** ve **Fiziksel Aktivite** verilerini düzenli bir şekilde takip etmelerini sağlayan bir mobil uygulamadır. Kullanıcı dostu arayüzü ve kalıcı veri saklama özelliği ile günlük sağlık verilerinin yönetimini kolaylaştırır.
 
