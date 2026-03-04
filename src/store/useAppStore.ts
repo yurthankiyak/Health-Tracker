@@ -29,9 +29,19 @@ export interface NutritionRecord {
   date: string;
 }
 
+export interface ActivityRecord {
+  id: string;
+  type: string;
+  duration: string;
+  isDone: boolean;
+  date: string;
+  time: string;
+}
+
 interface AppState {
   bloodSugarRecords: BloodSugarRecord[];
   nutritionRecords: NutritionRecord[];
+  activityRecords: ActivityRecord[];
   
   // Blood Sugar Actions
   addBloodSugar: (record: Omit<BloodSugarRecord, 'id' | 'date' | 'time'>) => void;
@@ -41,6 +51,11 @@ interface AppState {
   addFoodToMeal: (week: string, meal: string, food: Omit<FoodRecord, 'id'>) => void;
   removeFoodFromMeal: (mealId: string, foodId: string) => void;
   clearMeal: (mealId: string) => void;
+
+  // Activity Actions
+  addActivity: (activity: Omit<ActivityRecord, 'id' | 'date' | 'time'>) => void;
+  removeActivity: (id: string) => void;
+  toggleActivityDone: (id: string) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -48,6 +63,7 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       bloodSugarRecords: [],
       nutritionRecords: [],
+      activityRecords: [],
 
       addBloodSugar: (record) => set((state) => {
         const now = new Date();
@@ -66,7 +82,6 @@ export const useAppStore = create<AppState>()(
 
       addFoodToMeal: (week, meal, food) => set((state) => {
         const date = new Date().toLocaleDateString('tr-TR').replace(/\./g, '-');
-        // Find existing record for this week/meal/date
         const recordIndex = state.nutritionRecords.findIndex(
           r => r.week === week && r.meal === meal && r.date === date
         );
@@ -111,6 +126,27 @@ export const useAppStore = create<AppState>()(
 
       clearMeal: (mealId) => set((state) => ({
         nutritionRecords: state.nutritionRecords.filter(r => r.id !== mealId)
+      })),
+
+      addActivity: (activity) => set((state) => {
+        const now = new Date();
+        const newRecord: ActivityRecord = {
+          ...activity,
+          id: Math.random().toString(36).substring(7),
+          date: now.toLocaleDateString('tr-TR').replace(/\./g, '-'),
+          time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+        };
+        return { activityRecords: [newRecord, ...state.activityRecords] };
+      }),
+
+      removeActivity: (id) => set((state) => ({
+        activityRecords: state.activityRecords.filter(a => a.id !== id)
+      })),
+
+      toggleActivityDone: (id) => set((state) => ({
+        activityRecords: state.activityRecords.map(a => 
+          a.id === id ? { ...a, isDone: !a.isDone } : a
+        )
       }))
     }),
     {
