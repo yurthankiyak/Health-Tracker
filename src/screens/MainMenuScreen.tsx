@@ -14,7 +14,7 @@ const MainMenuScreen = () => {
 
   const menuItems = [
     { id: 1, title: 'Kan Şekeri İzlem', icon: 'water', route: 'BloodSugarList' as const },
-    { id: 2, title: 'Fiziksel Aktivite', icon: 'bicycle', route: 'DailyGoals' as const },
+    { id: 2, title: 'Fiziksel Aktivite ve Gebelik Hedefleri', icon: 'list', route: 'DailyGoals' as const },
     { id: 3, title: 'Beslenme Değerlendirme', icon: 'restaurant', route: 'NutritionForm' as const },
   ];
 
@@ -82,3 +82,4 @@ const styles = StyleSheet.create({
 });
 
 export default MainMenuScreen;
+

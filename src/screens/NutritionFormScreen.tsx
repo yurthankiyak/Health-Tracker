@@ -5,28 +5,47 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { theme } from '../constants/theme';
 import { Ionicons } from '@expo/vector-icons';
+import { Picker } from '@react-native-picker/picker';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'NutritionForm'>;
 
 const NutritionFormScreen = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [week, setWeek] = useState('Gebelik Haftasını Seçiniz');
+  const [week, setWeek] = useState('1');
   const [meal, setMeal] = useState('Sabah');
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.label}>Gebelik Haftasını Seçiniz:</Text>
-        <TouchableOpacity style={styles.dropdown}>
-          <Text style={styles.dropdownText}>{week}</Text>
-          <Ionicons name="chevron-down" size={20} color={theme.colors.lightText} />
-        </TouchableOpacity>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={week}
+            onValueChange={(itemValue) => setWeek(itemValue)}
+            style={styles.picker}
+            dropdownIconColor={theme.colors.lightText}
+          >
+            {[...Array(40).keys()].map(i => (
+              <Picker.Item key={i} label={\\. Hafta\} value={String(i + 1)} />
+            ))}
+          </Picker>
+        </View>
 
         <Text style={styles.label}>Öğünü Seçiniz:</Text>
-        <TouchableOpacity style={styles.dropdown}>
-          <Text style={styles.dropdownText}>{meal}</Text>
-          <Ionicons name="chevron-down" size={20} color={theme.colors.lightText} />
-        </TouchableOpacity>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={meal}
+            onValueChange={(itemValue) => setMeal(itemValue)}
+            style={styles.picker}
+            dropdownIconColor={theme.colors.lightText}
+          >
+            <Picker.Item label="Sabah" value="Sabah" />
+            <Picker.Item label="Öğle" value="Öğle" />
+            <Picker.Item label="Akşam" value="Akşam" />
+            <Picker.Item label="Ara Öğün 1" value="Ara 1" />
+            <Picker.Item label="Ara Öğün 2" value="Ara 2" />
+          </Picker>
+        </View>
 
         <TouchableOpacity 
           style={styles.button}
@@ -59,16 +78,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600'
   },
-  dropdown: {
+  pickerContainer: {
     backgroundColor: theme.colors.background,
-    padding: theme.spacing.m,
     borderRadius: theme.borderRadius.s,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     marginBottom: theme.spacing.l,
+    overflow: 'hidden',
   },
-  dropdownText: {
+  picker: {
     color: theme.colors.text,
   },
   button: {

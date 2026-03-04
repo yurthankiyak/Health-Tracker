@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+﻿import React, { useState } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -10,12 +10,22 @@ import Button from '../components/Button';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'BloodSugarList'>;
 
-const mockData = [
+export interface BloodSugarRecord {
+  id: string;
+  meal: string;
+  status: string;
+  date: string;
+  time: string;
+  glucoseValue: number;
+  insulinDose: string;
+}
+
+const initialData: BloodSugarRecord[] = [
   {
     id: '1',
     meal: 'Sabah',
     status: 'Açlık',
-    date: '05-03-2023',
+    date: new Date().toLocaleDateString('tr-TR').replace(/\./g, '-'),
     time: '16:58:00',
     glucoseValue: 60,
     insulinDose: '',
@@ -24,8 +34,26 @@ const mockData = [
 
 const BloodSugarListScreen = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [data, setData] = useState<BloodSugarRecord[]>(initialData);
 
-  const renderItem = ({ item }: { item: typeof mockData[0] }) => (
+  const handleDelete = (id: string) => {
+    Alert.alert(
+      "Sil",
+      "Bu kaydı silmek istediğinize emin misiniz?",
+      [
+        { text: "İptal", style: "cancel" },
+        { text: "Sil", style: "destructive", onPress: () => setData(data.filter(item => item.id !== id)) }
+      ]
+    );
+  };
+
+  const handleInfo = () => {
+    Alert.alert("Bilgi Merkezi", "Bu alanda beslenme veya insülin detayları görüntülenir.");
+  }
+
+  const currentDate = new Date().toLocaleDateString('tr-TR').replace(/\./g, '-');
+
+  const renderItem = ({ item }: { item: BloodSugarRecord }) => (
     <Card style={styles.card}>
       <View style={styles.cardContent}>
         <View style={styles.textContainer}>
@@ -39,10 +67,10 @@ const BloodSugarListScreen = () => {
         <View style={styles.actionsContainer}>
           <View style={styles.avatarPlaceholder} />
           <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={handleInfo}>
               <Ionicons name="information-circle" size={24} color={theme.colors.buttonBlue} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={() => handleDelete(item.id)}>
               <Ionicons name="trash" size={24} color="red" />
             </TouchableOpacity>
           </View>
@@ -55,7 +83,7 @@ const BloodSugarListScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.topBar}>
         <View style={styles.datePicker}>
-          <Text style={styles.dateText}>05-03-2023</Text>
+          <Text style={styles.dateText}>{currentDate}</Text>
           <Ionicons name="calendar" size={20} color={theme.colors.background} />
         </View>
         <Button 
@@ -68,10 +96,11 @@ const BloodSugarListScreen = () => {
       </View>
       
       <FlatList 
-        data={mockData}
+        data={data}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
+        ListEmptyComponent={<Text style={{textAlign: 'center', color: 'white', marginTop: 20}}>Henüz kayıt bulunmamaktadır.</Text>}
       />
     </SafeAreaView>
   );
