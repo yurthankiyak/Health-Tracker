@@ -54,7 +54,7 @@ const FoodAddScreen = () => {
     });
 
     setAmount('');
-    Alert.alert("Başarılı", \\ listeye eklendi.\);
+    Alert.alert("Başarılı", `${selectedFood.name} listeye eklendi.`);
   };
 
   const removeFoodFromMeal = useAppStore(state => state.removeFoodFromMeal);
@@ -105,7 +105,7 @@ const FoodAddScreen = () => {
         <View style={styles.inputSection}>
           <TextInput 
             style={styles.input}
-            placeholder={\Miktar giriniz (\)\}
+            placeholder={`Miktar giriniz (${selectedFood.unit})`}
             placeholderTextColor="#999"
             value={amount}
             onChangeText={setAmount}
