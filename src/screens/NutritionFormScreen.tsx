@@ -35,7 +35,7 @@ const NutritionFormScreen = () => {
             dropdownIconColor={theme.colors.lightText}
           >
             {[...Array(40).keys()].map(i => (
-              <Picker.Item key={i} label={\\. Hafta\} value={String(i + 1)} />
+              <Picker.Item key={i} label={`${i + 1}. Hafta`} value={String(i + 1)} />
             ))}
           </Picker>
         </View>
