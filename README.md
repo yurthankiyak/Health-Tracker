@@ -38,11 +38,11 @@ Uygulamayı kendi bilgisayarınızda çalıştırmak için aşağıdaki adımlar
 
 ## 📹 Uygulama Tanıtım Videosu
 Uygulamanın çalışma anına ait kısa videoyu aşağıdan izleyebilirsiniz:
-> [Tanıtım Videosu (YouTube Unlisted)] - [BURAYA KENDİ LİNKİNİZİ EKLEYİNİZ]
+> [Tanıtım Videosu (YouTube Unlisted)] - https://www.youtube.com/shorts/oQE2upYdSc4
 
 ## 📱 APK/IPA Dosyaları
 Uygulamanın kurulum dosyalarına (Android APK) aşağıdaki bölümden ulaşabilirsiniz:
-> [APK İndirme Bağlantısı] - [BURAYA KENDİ LİNKİNİZİ EKLEYİNİZ]
+> [APK İndirme Bağlantısı] - 
 
 ---
-**Geliştiren:** [Kendi Adınız]
+**Geliştiren:** Yurthan Kıyak
