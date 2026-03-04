@@ -1,50 +1,48 @@
-﻿# Pregnancy Tracker (React Native + Expo) ⚛️📱
+﻿# Gebelik Takip ve Sağlık Uygulaması (Pregnancy Tracker)
 
-Bu proje, hamilelik sürecinde olan kadınların kan şekeri, beslenme, fiziksel aktivite gibi metriklerini ve günlük hedeflerini takip etmelerini sağlayan bir mobil uygulamadır. Üniversite/Bootcamp projesi gereksinimleri doğrultusunda React Native ve Expo kullanılarak geliştirilmiştir.
+Bu proje, hamilelik sürecindeki annelerin **Kan Şekeri**, **Beslenme** ve **Fiziksel Aktivite** verilerini düzenli bir şekilde takip etmelerini sağlayan bir mobil uygulamadır. Kullanıcı dostu arayüzü ve kalıcı veri saklama özelliği ile günlük sağlık verilerinin yönetimini kolaylaştırır.
 
-## 📸 Ekran Görüntüleri ve Tasarım
-
-Uygulamanın arayüzü, panoda verilen referans tasarım temel alınarak oluşturulmuştur. Kırmızı ve beyaz tonların ağırlıkta olduğu, okunabilir ve net bir arayüz tasarlanmıştır.
-
-## 📦 Özellikler
-
-- **Giriş (Login) Ekranı:** Kullanıcı adı ve şifre ile basit giriş deneyimi.
-- **Ana Menü:** Modüllere kolay erişim sağlayan ikonlu kart yapısı (Kan Şekeri İzlem, Fiziksel Aktivite, Beslenme Değerlendirme).
-- **Kan Şekeri İzlem:** Önceki ölçümlerin listelendiği, detaylı kart görünümü ve silme özelliğini barındıran liste ekranı.
-- **Kan Şekeri Uyarı Modalı:** Ölçüm eklendiğinde eğer değer kritik seviyedeyse (örn: Hipoglisemi, <70), kullanıcıyı şeker tüketmeye ve ara öğün almaya yönlendiren bilgilendirici bir Alert yapısı.
-- **Beslenme Formu:** Öğün ve besin miktarları ekleme ekranları. Seçilen besine göre dinamik kalori/ölçü gösterimi sağlayan dummy data (mock data) altyapısı.
-- **Günlük Hedefler:** Kan şekeri, beslenme ve fiziksel aktivite konusunda gebelikte olması gereken standart hedef değerlerin yer aldığı bilgilendirme sayfası.
+## 🚀 Temel Özellikler
+- **Kalıcı Veri (Zustand + AsyncStorage)**: Girdiğiniz tüm veriler telefonunuza kaydedilir, uygulama kapansa da kaybolmaz.
+- **Kan Şekeri İzlemi**: Açlık/Tokluk değerleri, insülin dozu ve otomatik tarih/saat damgası. Düşük/Yüksek şeker durumunda otomatik uyarı sistemi.
+- **Detaylı Beslenme Takibi**: Öğün bazlı (Sabah, Öğle, Akşam, Ara Öğünler) yiyecek ekleme ve otomatik kalori hesaplama.
+- **Fiziksel Aktivite Günlüğü**: Aktivite türü (Yürüyüş, Yoga, Özel Giriş vb.) ve süre takibi.
+- **Modern UI**: React Native ve Expo ile geliştirilmiş, göz yormayan ve hızlı arayüz.
 
 ## 🛠 Kullanılan Teknolojiler
+- **Framework**: React Native (Expo SDK 54)
+- **State Management**: Zustand
+- **Veri Saklama**: AsyncStorage
+- **Navigasyon**: React Navigation (@react-navigation/native-stack)
+- **Form Yönetimi**: Formik & Yup
+- **İkonlar**: Expo Ionicons
 
-- **React Native** & **Expo**
-- **TypeScript** (Tip güvenliği için)
-- **React Navigation** (\@react-navigation/native-stack\) - Ekranlar arası geçişler için.
-- **Expo Vector Icons** (Arayüzdeki görseller ve ikonlar için)
-- Gelişmiş Dummy Data (Mock Veriler) ile ekran gösterimleri
+## 📦 Kurulum ve Yerelde Çalıştırma
+Uygulamayı kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-## 🚀 Kurulum & Çalıştırma
-
-1. Repoyu bilgisayarınıza klonlayın:
-   \\\ash
-   git clone <repo-url>
-   cd PregnancyTracker
-   \\\
-
-2. Paketleri yükleyin:
-   \\\ash
+1. **Bağımlılıkları Kurun**:
+   Terminali açın ve proje klasöründe şu komutu çalıştırın:
+   ```bash
    npm install
-   \\\
+   ```
 
-3. Projeyi başlatın:
-   \\\ash
+2. **Uygulamayı Başlatın**:
+   ```bash
    npx expo start
-   \\\
+   ```
 
-4. Açılan QR kodunu telefonunuzdaki **Expo Go** uygulaması ile okutarak ya da Android/iOS emülatöründe (A veya I tuşlarına basarak) uygulamayı çalıştırabilirsiniz.
+3. **Telefonda Görüntüleme**:
+   - Telefonunuza **Expo Go** uygulamasını (App Store / Play Store) indirin.
+   - Terminalde çıkan **QR kodu** telefonunuzun kamerası (veya Expo Go uygulaması) ile taratın.
+   - Uygulama saniyeler içinde telefonunuzda açılacaktır.
 
-## 📝 Proje Notu (Kararlar ve Problem Çözümü)
+## 📹 Uygulama Tanıtım Videosu
+Uygulamanın çalışma anına ait kısa videoyu aşağıdan izleyebilirsiniz:
+> [Tanıtım Videosu (YouTube Unlisted)] - [BURAYA KENDİ LİNKİNİZİ EKLEYİNİZ]
 
-- **Problem:** Hamile kadınların düzenli olarak birden fazla sağlık metriğini takip etmesi zordur.
-- **Hedef Kitle:** Düzenli tıbbi takibe ihtiyaç duyan ve özellikle Gestasyonel Diyabet (Gebelik Şekeri) riski taşıyan hamile kadınlar.
-- **Tasarım Kararları:** Uygulamanın oldukça sade ve stres yaratmayan bir renk paletine sahip olması hedeflendi. Referans tasarımdaki renkler ve "Kart" tabanlı navigasyon modülleri doğrudan React Native ile komponentleştirilerek implemente edildi ("src/components/Card.tsx"). Uyarıların modal şeklinde ve kırmızı çizgilerle dikkat çeker biçimde olmasına özen gösterildi.
+## 📱 APK/IPA Dosyaları
+Uygulamanın kurulum dosyalarına (Android APK) aşağıdaki bölümden ulaşabilirsiniz:
+> [APK İndirme Bağlantısı] - [BURAYA KENDİ LİNKİNİZİ EKLEYİNİZ]
+
+---
+**Geliştiren:** [Kendi Adınız]
