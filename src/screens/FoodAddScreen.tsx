@@ -18,8 +18,8 @@ const FoodAddScreen = () => {
   const [amount, setAmount] = useState('');
   
   // These are passed from NutritionFormScreen or assumed
-  const week = '1'; // Defaulting for now if not passed
-  const meal = 'Sabah'; // Defaulting
+  const week = route.params?.week || '1';
+  const meal = route.params?.meal || 'Sabah';
 
   const addFoodToMeal = useAppStore(state => state.addFoodToMeal);
   const nutritionRecords = useAppStore(state => state.nutritionRecords);
@@ -249,3 +249,4 @@ const styles = StyleSheet.create({
 });
 
 export default FoodAddScreen;
+

@@ -77,7 +77,7 @@ const NutritionFormScreen = () => {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => navigation.navigate('FoodAdd')}
+          onPress={() => navigation.navigate('FoodAdd', { week, meal })}
         >
           <Text style={styles.buttonText}>Besin Seçimine Git</Text>
           <Ionicons name="arrow-forward" size={20} color={theme.colors.background} />
@@ -186,3 +186,4 @@ const styles = StyleSheet.create({
 });
 
 export default NutritionFormScreen;
+

@@ -17,7 +17,7 @@ export type RootStackParamList = {
   BloodSugarList: undefined;
   BloodSugarAdd: undefined;
   NutritionForm: undefined;
-  FoodAdd: undefined;
+  FoodAdd: { week: string; meal: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -44,3 +44,4 @@ export const AppNavigator = () => {
     </NavigationContainer>
   );
 };
+
