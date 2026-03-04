@@ -42,7 +42,7 @@ Uygulamanın çalışma anına ait kısa videoyu aşağıdan izleyebilirsiniz:
 
 ## 📱 APK/IPA Dosyaları
 Uygulamanın kurulum dosyalarına (Android APK) aşağıdaki bölümden ulaşabilirsiniz:
-> [APK İndirme Bağlantısı] - 
+> [APK İndirme Bağlantısı] - https://expo.dev/artifacts/eas/5AjvVhXDDcE9npFZoSxYwW.apk
 
 ---
 **Geliştiren:** Yurthan Kıyak
